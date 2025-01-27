@@ -1,0 +1,134 @@
+/*** BUTTON */
+button, .btn {
+    --btn--width: 240px;
+    --btn--border-radius: 3px;
+    --btn--fw: bold;
+    --btn--bg: #bbb;
+    --btn--clr: white;
+    --btn--bg-hover: #ccc;
+    --btn--clr-hover: white;
+}
+
+.btn-default:where(a, button, .btn) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-05);
+    cursor: pointer;
+    width: var(--btn--width);
+    /* min-width: var(--btn--width); */
+    min-height: 40px;
+    padding: 0.66em 1.7em; 
+    background-color: var(--btn--bg);
+    color: var(--btn--clr);
+    transition-duration: 125ms;
+    border: none;
+    border-radius: var(--btn--border-radius);
+    font-family: var(--ff-text);
+    font-weight: var(--btn--fw);
+}
+.btn-default:where(a, button, .btn):hover {
+    color: var(--btn--clr-hover);
+    background-color: var(--btn--bg-hover);
+}
+:where(button, .btn) img {
+    width: auto;    
+}
+.icon-edit {
+    --icon-multipl: 1.5;
+}
+.icon-archive {
+    --icon-multipl: 0.9;
+}
+/* .icon-duplicate {
+    --icon-multipl: 1;
+} */
+
+
+
+/*** FORM */
+:root {
+    --input--indent: 1rem;
+    --input--border-radius: 3px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+}
+form label {
+    font-size: var(--fs-text-sm);
+}
+input, textarea {
+    /* display: block; */
+    font-family: var(--ff-text);
+    font-size: var(--fs-text);
+    /* color: var(--clr-accent); */
+    border: solid 1px black;
+    border-radius: var(--input--border-radius);
+    height: 40px;
+    width: 100%;
+}
+input {
+    text-indent: var(--input--indent);
+}
+input[name="title"] {
+    font-weight: var(--fw-bold);
+}
+textarea {
+    min-height: 125px;
+    padding-top: var(--sp-05);
+    padding-left: var(--input--indent);
+    line-height: 1.5;
+    resize: vertical;
+}
+input::placeholder {
+    opacity: 0.75;
+}
+form :where(input, textarea) {
+    margin-bottom: var(--sp-05);
+}
+
+
+
+
+/*** NOTE */
+.notes {
+    display: grid;
+    gap: var(--sp-05);
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+.note {
+    padding: var(--sp-05) var(--sp-10);
+    border-radius: 6px;
+    box-shadow: 3px 4px 16px 0px rgba(66, 68, 90, 0.17);
+}
+.note h3 {
+    margin-top: 8px;
+}
+.note .buttons {
+    align-items: center;
+    margin-top: var(--sp-05);
+    gap: var(--sp-10);
+}
+.note button {
+    opacity: 0.6;
+    transition: 350ms;
+}
+.note button:hover {
+    opacity: 1;
+}
+.note button img {
+    height: 1rem;
+    height: calc(1rem * var(--icon-multipl));
+}
+
+
+/*** RESPONSIV */
+@media(max-width: 359px) {
+    .btn-default:not(.icon-btn) {
+        --btn--width: 100%;
+        --btn--width-sm: 100%;
+    }
+}

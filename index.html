@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/templates.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Notizblock</title>
+</head>
+
+<body onload="renderNotes()">
+
+    <header class="section gap">
+        <div class="ct-container flex-row justify-between gap align-center">
+            <h1>Notizblock</h1>
+            <div class="flex-row gap-05 buttons">
+                <button onclick="showHideInput()" id="btnInput" class="btn-default icon-btn active" title="Erfassung ein-/ausblenden"><img src="assets/icons/google-edit-note.svg" alt="enter-note" class="icon-edit"></button>
+
+                <button onclick="showHideArchive()" id="btnArchive" class="btn-default icon-btn" title="Archiv ein-/ausblenden"><img src="assets/icons/google-inventory.svg" alt="show-hide-archive" class="icon-archive"></button>
+
+                <button onclick="showHideTrash()" id="btnTrash" class="btn-default icon-btn" title="Papierkorb ein-/ausblenden"><img src="assets/icons/google-delete.svg" alt="show-hide-trash" class="icon-trash"></button>
+            </div>
+        </div>
+        <div id="input" class="ct-container active">
+            <form>
+                <input id="noteTitleInput" type="text" name="title" placeholder="Titel.." required />
+                <textarea id="noteInput"  type="text" name="content" placeholder="Notizinhalt..." required></textarea>
+                <button onclick="addActiveNote()" title="Notiz speichern" class="btn-default">
+                    <img src="assets/icons/google-save.svg" alt="save-note" class="icon-save">
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <section id="active">
+            <div class="ct-container">
+                <h2>Aktive Notizen</h2>
+                <div id="activeNotes" class="notes"></div>
+            </div>
+        </section>
+    
+        <section id="archive">
+            <div class="ct-container">
+                <h2>Archivierte Notizen</h2>
+                <div id="archiveNotes" class="notes"></div>
+            </div>
+        </section>
+    
+        <section id="trash">
+            <div class="ct-container">
+                <h2>Papierkorb</h2>
+                <div id="trashNotes" class="notes"></div>
+                <button id="btnEmptyTrash" class="btn-default mt-20" onclick="emptyTrash()">Papierkorb leeren</button>
+            </div>
+        </section>
+  
+    </main>
+
+</body>
+
+</html>

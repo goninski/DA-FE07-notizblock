@@ -1,0 +1,84 @@
+@import url("assets/fonts/fonts.css");
+@import url("styles/fw-presets.css");
+@import url("styles/fw-classes.css");
+@import url("styles/components.css");
+
+
+/*** VARIABLES */
+:root {
+    /* --header-height: 90px; */
+
+    --pad-y-sec: 48px;
+    --pad-y-sec-sm: 24px;
+    /* --pad-y-sec-xs: 16px; */
+
+    --ff-text: "Delius", serif;
+    --ff-hd: var(--ff-text);
+
+    --fs-text: 16px;
+    --fs-text-sm: 14px;
+    --fs-text-lg: 22px;
+    --lh-text: 1.5;
+
+    --fs-h1: 40px;
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-bold: 600;
+
+    --fw-text: var(--fw-regular);
+    --fw-hd: var(--fw-bold);
+
+    --clr-text: black;
+    --clr-hd: black;
+    --bg-page: yellow;
+    --bg-sts-green: rgb(49, 219, 49);
+    --bg-sts-red: rgb(252, 135, 135);
+}
+
+header {
+    padding-top: var(--pad-y-sec-sm);
+    padding-bottom: var(--pad-y-sec-sm);
+    background-color: #333;
+    color: white;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+header button {
+    --btn--width: 76px;
+}
+header .buttons button.active {
+    --btn--bg: var(--bg-sts-green);
+}
+header .buttons button[data-items] {
+    border-bottom: solid 8px var(--bg-sts-green);
+}
+header .buttons img {
+    height: calc(1.66rem * var(--icon-multipl));
+}
+#archive {
+    background-color: lightyellow;
+}
+#trash {
+    background-color: #eee;
+}
+:is(#input, #archive, #trash):not(.active) {
+    display: none;
+}
+h2 {
+    margin-bottom: 0.8em;
+}
+#btnEmptyTrash:hover {
+    --btn--bg-hover: var(--bg-sts-red);
+}
+
+
+/*** RESPONSIV */
+@media(max-width: 359px) {
+    header .buttons {
+        justify-content: space-between;
+        width: 100%;
+    }
+}

@@ -1,0 +1,134 @@
+/*** VARIABLES */
+:root {
+    --width-ct: 1440px;
+    --pad-x-sec: 4vw;
+
+    --sp-05: 12px;
+    --sp-10: 24px;
+    --sp-20: 32px;
+    --sp-30: 40px;
+    --sp-40: 48px;
+    --sp-50: 64px;
+    --sp-60: 80px;
+    --sp-70: 96px;
+    --sp-80: 120px;
+    --sp-90: 150px;
+
+    --icon-multipl: 1;
+}
+@media(max-width: 719px) {
+    :root {
+        --pad-x-sec: 24px;
+    }
+}
+@media(max-width: 359px) {
+    :root {
+        --pad-x-sec: 20px;
+    }
+}
+@media(min-width: 1516px) {
+    :root {
+        --pad-x-sec: 64px;
+    }
+}
+
+/*** LAYOUT */
+* {
+    box-sizing: border-box;
+}
+html {
+    background-color: var(--bg-page);
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    font-family: var(--ff-text);
+    font-size: var(--fs-text);
+    line-height: var(--lh-text);
+    font-weight: var(--fw-text);
+    color: var(--clr-text);
+}
+header {
+    z-index: 1;
+}
+footer {
+    margin-top: auto !important;
+}
+:where(section, .section) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+:where(section, .section):not(.seamless-x, .seamless) {
+    padding-left: var(--pad-x-sec);
+    padding-right: var(--pad-x-sec);
+}
+:where(section, .section):not(.seamless-y, .seamless, header, footer) {
+    padding-top: var(--pad-y-sec);
+    padding-bottom: var(--pad-y-sec);
+}
+.ct-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: var(--width-ct);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--ff-hd);
+    font-weight: var(--fw-hd);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+:where(h1) {
+    font-size: var(--fs-h1);
+    line-height: 1.2;
+    margin-bottom: var(--sp-05);
+}
+a {
+    color: var(--clr-text);
+    text-decoration: none;
+    transition-duration: 125ms;
+}
+a:not(.button, .btn-default):hover {
+    color: var(--clr-accent-hover);
+}
+:where(button) {
+    background-color: unset;
+    border: unset;
+    padding: 0;
+    cursor: pointer;
+}
+:where(ul) {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+:where(figure) {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    position: relative;
+}
+:where(figcaption) {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    justify-content: center;
+}
+/* :where(img) {
+    max-width: 100%;
+    display: block;
+} */

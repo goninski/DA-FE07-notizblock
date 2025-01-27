@@ -1,0 +1,153 @@
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.justify-center {
+    justify-content: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.justify-around {
+    justify-content: space-around;
+}
+.justify-start {
+    justify-content: flex-start;
+}
+.justify-end {
+    justify-content: flex-end;
+}
+.align-center {
+    align-items: center;
+}
+.align-end {
+    align-items: flex-end;
+}
+.align-stretch {
+    align-items: stretch;
+}
+.center {
+    justify-content: center;
+    align-items: center;
+}
+.align-self-stretch {
+    align-self: stretch;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.full-width {
+    width: 100%;
+}
+.ct-width-full {
+    --width-ct: 100%;
+}
+.full-height {
+    min-height: 100vh;
+}
+.margin-x-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.margin-y-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.text-center {
+    text-align: center;
+}
+.hide {
+    display: none !important;
+}
+
+/*** SECTION SPACING */
+.pad-x-sec {
+    padding-left: var(--pad-x-sec);
+    padding-right: var(--pad-x-sec);
+}
+.pad-y-sec {
+    padding: var(--pad-y-sec) var(--pad-y-sec);
+}
+.pad-y-sec-sm {
+    padding: var(--pad-y-sec-sm) var(--pad-y-sec-sm);
+}
+.pad-y-sec-xs {
+    padding: var(--pad-y-sec-xs) var(--pad-y-sec-xs);
+}
+
+/*** MARGIN TOP/BOTTOM */
+.gap-05 {
+    gap: var(--sp-05);
+}
+.gap-10, .gap {
+    gap: var(--sp-10);
+}
+.mt-20 {
+    gap: var(--sp-20);
+}
+
+/*** MARGIN TOP/BOTTOM */
+.mt-05 {
+    margin-top: var(--sp-05);
+}
+.mt-10, .mt {
+    margin-top: var(--sp-10);
+}
+.mt-20 {
+    margin-top: var(--sp-20);
+}
+.mt-30 {
+    margin-top: var(--sp-30);
+}
+.mb-05 {
+    margin-bottom: var(--sp-05);
+}
+.mb-10, .mb {
+    margin-bottom: var(--sp-10);
+}
+.mb-20 {
+    margin-bottom: var(--sp-20);
+}
+.mb-30 {
+    margin-bottom: var(--sp-30);
+}
+
+/*** TYPOGRAPHY */
+.uppercase {
+    text-transform: uppercase;
+}
+
+/*** IMAGES */
+.bg-img-cover {
+    background-size: cover;
+    background-position: center;
+}
+.img-cover {
+    object-fit: cover;
+}
+.img-contain {
+    object-fit: contain;
+}
+
+
+
+@media(max-width: 719px) {
+    .flex-row {
+        flex-wrap: wrap;
+    }
+}
+@media(max-width: 359px) {
+}
+@media(min-width: 1516px) {
+}
