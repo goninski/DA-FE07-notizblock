@@ -6,10 +6,19 @@ let archiveNotes = [];
 let trashNotesTitles = [];
 let trashNotes = [];
 
+let allNotes = {
+    "activeNotesTitles": [],
+    "activeNotes": [],
+    "archiveNotesTitles": [],
+    "archiveNotes": [],
+    "trashNotesTitles": [],
+    "trashNotes": [],
+}
+
 function renderNotes(){
-    renderActive();
-    renderArchive();
-    renderTrash();
+    renderActiveNotes();
+    renderArchiveNotes();
+    renderTrashNotes();
 }
 
 function showHideInput(){
@@ -35,17 +44,17 @@ function showHideTrash(){
     }
 }
 
-function renderActive(){
-    renderActiveNotes();
-}
+// function renderActive(){
+//     renderActiveNotes();
+// }
 
-function renderArchive(){
-    renderArchiveNotes();
-}
+// function renderArchive(){
+//     renderArchiveNotes();
+// }
 
-function renderTrash(){
-    renderTrashNotes();
-}
+// function renderTrash(){
+//     renderTrashNotes();
+// }
 
 function renderActiveNotes(){
     let activeInnerRef = document.getElementById('activeNotes');
