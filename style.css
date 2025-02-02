@@ -58,13 +58,13 @@ header .buttons button[data-items] {
 header .buttons img {
     height: calc(1.66rem * var(--icon-multipl));
 }
-#archive {
+#archiveSection {
     background-color: lightyellow;
 }
-#trash {
+#trashSection {
     background-color: #eee;
 }
-:is(#input, #archive, #trash):not(.active) {
+:is(#input, #archiveSection, #trashSection):not(.active) {
     display: none;
 }
 h2 {

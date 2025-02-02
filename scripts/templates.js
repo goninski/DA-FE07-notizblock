@@ -1,8 +1,8 @@
 function getActiveNoteTemplate(indexActiveNote){
     return `
     <div class="note flex-col">
-        <h3>${notes.activeNotesTitles[indexActiveNote]}</h4>
-        <p>${notes.activeNotes[indexActiveNote]}</p>
+        <h3>${notes.activeNoteTitles[indexActiveNote]}</h4>
+        <p>${notes.activeNoteContents[indexActiveNote]}</p>
         <div class="buttons flex-row gap-05">
             <button onclick="duplicateActiveNote(${indexActiveNote})" title="Notiz duplizieren">
                 <img src="assets/icons/google-copy.svg" alt="copy" class="icon-duplicate">
@@ -21,8 +21,8 @@ function getActiveNoteTemplate(indexActiveNote){
 function getArchiveNoteTemplate(indexArchiveNote){
     return `
     <div class="note flex-col">
-        <h3>${notes.archiveNotesTitles[indexArchiveNote]}</h4>
-        <p>${notes.archiveNotes[indexArchiveNote]}</p>
+        <h3>${notes.archiveNoteTitles[indexArchiveNote]}</h4>
+        <p>${notes.archiveNoteContents[indexArchiveNote]}</p>
         <div class="buttons flex-row gap-05">
             <button onclick="restoreArchiveNote(${indexArchiveNote})" title="Notiz reaktivieren">
                 <img src="assets/icons/google-upload.svg" alt="restore"  class="icon-restore">
@@ -38,8 +38,8 @@ function getArchiveNoteTemplate(indexArchiveNote){
 function getTrashNoteTemplate(indexTrashNote){
     return `
     <div class="note flex-col">
-        <h3>${notes.trashNotesTitles[indexTrashNote]}</h4>
-        <p>${notes.trashNotes[indexTrashNote]}</p>
+        <h3>${notes.trashNoteTitles[indexTrashNote]}</h4>
+        <p>${notes.trashNoteContents[indexTrashNote]}</p>
         <div class="buttons flex-row gap-05">
             <button onclick="restoreTrashNote(${indexTrashNote})" title="Notiz wiederherstellen">
                 <img src="assets/icons/google-upload.svg" alt="restore" class="icon-restore">
