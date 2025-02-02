@@ -70,7 +70,7 @@ header .buttons img {
 h2 {
     margin-bottom: 0.8em;
 }
-#btnEmptyTrash:hover {
+#emptyTrashBtn:hover {
     --btn--bg-hover: var(--bg-sts-red);
 }
 
