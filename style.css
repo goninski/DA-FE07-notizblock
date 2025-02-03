@@ -34,7 +34,7 @@
     --clr-hd: black;
     --bg-page: yellow;
     --bg-sts-green: rgb(49, 219, 49);
-    --bg-sts-red: rgb(252, 135, 135);
+    --bg-sts-red: #ff1a1a;
 }
 
 header {

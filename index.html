@@ -10,23 +10,23 @@
     <title>Notizblock</title>
 </head>
 
-<body onload="renderNotes()">
+<body onload="renderLocation()">
 
     <header class="section gap">
         <div class="ct-container flex-row justify-between gap align-center">
             <h1>Notizblock</h1>
             <div class="flex-row gap-05 buttons">
-                <button onclick="showHideInput()" id="inputBtn" class="btn-default icon-btn active" title="Erfassung ein-/ausblenden"><img src="assets/icons/google-edit-note.svg" alt="enter-note" class="icon-edit"></button>
+                <button onclick="showHideLocation('input')" id="inputBtn" class="btn-default icon-btn active" title="Erfassung ein-/ausblenden"><img src="assets/icons/google-edit-note.svg" alt="enter-note" class="icon-edit"></button>
 
-                <button onclick="showHideArchive()" id="archiveBtn" class="btn-default icon-btn" title="Archiv ein-/ausblenden"><img src="assets/icons/google-inventory.svg" alt="show-hide-archive" class="icon-archive"></button>
+                <button onclick="showHideLocation('archive')" id="archiveBtn" class="btn-default icon-btn" title="Archiv ein-/ausblenden"><img src="assets/icons/google-inventory.svg" alt="show-hide-archive" class="icon-archive"></button>
 
-                <button onclick="showHideTrash()" id="TrashBtn" class="btn-default icon-btn" title="Papierkorb ein-/ausblenden"><img src="assets/icons/google-delete.svg" alt="show-hide-trash" class="icon-trash"></button>
+                <button onclick="showHideLocation('trash')" id="trashBtn" class="btn-default icon-btn" title="Papierkorb ein-/ausblenden"><img src="assets/icons/google-delete.svg" alt="show-hide-trash" class="icon-trash"></button>
             </div>
         </div>
         <div id="input" class="ct-container active">
             <form>
-                <input id="noteTitleInput" type="text" name="title" placeholder="Titel.." required />
-                <textarea id="noteContentInput"  type="text" name="content" placeholder="Notizinhalt..." required></textarea>
+                <input id="inputNoteTitle" type="text" name="title" placeholder="Titel.." required />
+                <textarea id="inputNoteContent"  type="text" name="content" placeholder="Notizinhalt..." required></textarea>
                 <button onclick="addNote('active')" title="Notiz speichern" class="btn-default">
                     <img src="assets/icons/google-save.svg" alt="save-note" class="icon-save">
                 </button>

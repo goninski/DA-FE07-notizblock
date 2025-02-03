@@ -6,31 +6,27 @@ let notes = {
     "archiveNoteContents": [],
     "trashNoteTitles": [],
     "trashNoteContents": [],
-}
+};
 
 let noteFieldKeys = ["Title", "Content"];
 let noteFieldKey = "";
-let fieldKey = "";
-let fieldValue = "";
 let notesSource = [];
 let notesTarget = [];
-// let location = "";
 
-function addNote(location){
-    let inputNoteTitles = document.getElementById('noteTitleInput').value;
-    let inputNoteContents = document.getElementById('noteContentInput').value;
-    if( inputNoteTitles && inputNoteContents ) {
+function addNote(target){
+    let inputNoteTitle = document.getElementById('inputNoteTitle').value;
+    let inputNoteContent = document.getElementById('inputNoteContent').value;
+    if( inputNoteTitle && inputNoteContent ) {
         for (let i = 0; i < noteFieldKeys.length; i++) {
             noteFieldKey = noteFieldKeys[i];
-            let inputKey = "note" + noteFieldKey + "Input";
-            let input = document.getElementById(inputKey).value;
-            fieldKey = location + "Note" + noteFieldKey + "s";
-            notes[fieldKey].push(input);
-            localStorage.setItem(fieldKey, JSON.stringify(notes[fieldKey]));
+            let inputKey = "inputNote" + noteFieldKey;
+            let fieldValue = document.getElementById(inputKey).value;
+            let fieldKey = target + "Note" + noteFieldKey + "s";
+            notes[fieldKey].push(fieldValue);
+            notesTarget = notes[fieldKey];
+            localStorage.setItem(fieldKey, JSON.stringify(notesTarget));
         }
-        // renderActiveNotes();
-        // inputNoteTitles.value = "";
-        // inputNoteContents.value = "";
+        renderLocation(target, '--', notesTarget.length);
     }
 }
 
@@ -38,8 +34,8 @@ function moveNote(indexNote, source, target){
     for (let i = 0; i < noteFieldKeys.length; i++) {
         noteFieldKey = noteFieldKeys[i];
 
-        fieldKey = source + "Note" + noteFieldKey + "s";
-        fieldValue = notes[fieldKey][indexNote];
+        let fieldKey = source + "Note" + noteFieldKey + "s";
+        let fieldValue = notes[fieldKey][indexNote];
         notes[fieldKey].splice(indexNote, 1);
         notesSource = notes[fieldKey];
         localStorage.setItem(fieldKey, JSON.stringify(notesSource));
@@ -51,168 +47,90 @@ function moveNote(indexNote, source, target){
             localStorage.setItem(fieldKey, JSON.stringify(notesTarget));
         }    
     }
-    renderNotes(source, target, notesSource.lenght);
-    // if( notesSource.length === 0 ) {
-    //     if(source == 'archive') {
-    //         showHideArchive();
-    //     } else if(source == 'trash') {
-    //         showHideTrash();
-    //     }
-    // }
+    let items = notesSource.length;
+    renderLocation(source, target);
+    if(items <= 0) {
+        showHideLocation(source);
+    }
 }
 
 function duplicateNote(indexNote, source){
     for (let i = 0; i < noteFieldKeys.length; i++) {
         noteFieldKey = noteFieldKeys[i];
-        fieldKey = source + "Note" + noteFieldKey + "s";
-        fieldValue = notes[fieldKey][indexNote];
+        let fieldKey = source + "Note" + noteFieldKey + "s";
+        let fieldValue = notes[fieldKey][indexNote];
         notes[fieldKey].push(fieldValue);
         notesSource = notes[fieldKey];
         localStorage.setItem(fieldKey, JSON.stringify(notesSource));
     }
-    renderNotes(source, '--', 999);
+    renderLocation(source);
 }
 
 function emptyTrash(){
     for (let i = 0; i < noteFieldKeys.length; i++) {
-        fieldKey = "trashNote" + noteFieldKeys[i] + "s";
+        let fieldKey = "trashNote" + noteFieldKeys[i] + "s";
         notes[fieldKey] = [];
         localStorage.setItem(fieldKey, JSON.stringify(notes[fieldKey]));
     }
-    renderNotes('trash', '--', 0);
-    // showHideTrash();
+    renderLocation('trash');
+    showHideLocation('trash');
 }
 
-function getFromLocalStorage(location, type){
-    let stor = localStorage.getItem(location + "Note" + type);
+function getFromLocalStorage(source, fieldKey){
+    let stor = localStorage.getItem(source + "Note" + fieldKey + "s");
     let obj = JSON.parse(stor);
     return obj;
 }
 
-function renderNotes(source = 'active', target = 'active', items){
-
+function renderLocation(source = 'active', target = '---'){
     switch (true) {
         case source == 'active':
         case target == 'active':
-            renderNotesDet('active');
-            // renderActiveNotes();
+            renderNotes('active');
 
         case source == 'archive':
-            switch (items) {
-                case 0:
-                    showHideArchive()
-                }
         case target == 'archive':
-            renderNotesDet('archive');
-            // renderArchiveNotes();
+            renderNotes('archive');
 
         case source == 'trash':
-            switch (items) {
-                case 0:
-                    showHideTrash()
-                }
         case target == 'trash':
         case target == 'delete':
-            renderNotesDet('trash');
-            // renderTrashNotes();
+            renderNotes('trash');
         }
 }
 
-function renderNotesDet(source){
-    let notesRef = document.getElementById(source + 'Notes');
+function renderNotes(location){
+    let notesRef = document.getElementById(location + 'Notes');
     notesRef.innerHTML = "";
     for (let i = 0; i < noteFieldKeys.length; i++) {
         noteFieldKey = noteFieldKeys[i];
-        fieldKey = source + "Note" + noteFieldKey + "s";
-        notes[fieldKey] = getFromLocalStorage(source, noteFieldKey);
-    }
-    if(notes[source + 'NoteTitles'] && notes[source + 'NoteTitles'].length > 0) {
-        if(source != 'active') {
-            document.getElementById(source + 'btn').dataset.items = notes[source + 'NoteTitles'].length;
+        let fieldKey = location + "Note" + noteFieldKey + "s";
+        let storedNotes = getFromLocalStorage(location, noteFieldKey);
+        if(storedNotes){
+            notes[fieldKey] = storedNotes;
         }
-        for (let indexNote = 0; indexNote < notes[source + 'NoteTitles'].length; indexNote++) {
-            notesRef.innerHTML += getNoteTemplate(indexNote, source);
+    }
+    if(notes[location + 'NoteTitles'] && notes[location + 'NoteTitles'].length > 0) {
+        if(location != 'active') {
+            document.getElementById(location + 'Btn').dataset.items = notes[location + 'NoteTitles'].length;
+        }
+        for (let indexNote = 0; indexNote < notes[location + 'NoteTitles'].length; indexNote++) {
+            notesRef.innerHTML += getNoteTemplate(indexNote, location);
         }
     } else {
-        // notes.activeNoteTitles = [];
-        // notes.activeNoteContents = [];
-        notesRef.innerHTML = getEmptyTemplate(source);
+        notesRef.innerHTML = getEmptyTemplate(location);
+        if(location != 'active') {
+            delete document.getElementById(location + 'Btn').dataset.items;
+        }
     }
 }
 
-// function renderActiveNotes(){
-//     let activeInnerRef = document.getElementById('activeNotes');
-//     activeInnerRef.innerHTML = "";
-//     notes.activeNoteTitles = getFromLocalStorage("active", "Titles");
-//     notes.activeNoteContents = getFromLocalStorage("active", "Contents");
-//     if(notes.activeNoteTitles && notes.activeNoteTitles.length > 0) {
-//         for (let indexActiveNote = 0; indexActiveNote < notes.activeNoteTitles.length; indexActiveNote++) {
-//             activeInnerRef.innerHTML += getActiveNoteTemplate(indexActiveNote);
-//         }
-//     } else {
-//         notes.activeNoteTitles = [];
-//         notes.activeNoteContents = [];
-//         activeInnerRef.innerHTML = getEmptyActiveTemplate();
-//     }
-// }
-
-// function renderArchiveNotes(){
-//     let archiveInnerRef = document.getElementById('archiveNotes');
-//     archiveInnerRef.innerHTML = "";
-//     notes.archiveNoteTitles = getFromLocalStorage("archive", "Titles");
-//     notes.archiveNoteContents = getFromLocalStorage("archive", "Contents");
-//     if(notes.archiveNoteTitles && notes.archiveNoteTitles.length > 0) {
-//         document.getElementById("btnArchive").dataset.items = notes.archiveNoteTitles.length;
-//         for (let indexArchiveNote = 0; indexArchiveNote < notes.archiveNoteTitles.length; indexArchiveNote++) {
-//            archiveInnerRef.innerHTML += getArchiveNoteTemplate(indexArchiveNote);
-//         }
-//     } else {
-//         delete document.getElementById("btnArchive").dataset.items;
-//         notes.archiveNoteTitles = [];
-//         notes.archiveNoteContents = [];
-//         archiveInnerRef.innerHTML = getEmptyArchiveTemplate();
-//     }
-// }
-
-// function renderTrashNotes(){
-//     let trashInnerRef = document.getElementById('trashNotes');
-//     trashInnerRef.innerHTML = "";
-//     notes.trashNoteTitles = getFromLocalStorage("trash", "Titles");
-//     notes.trashNoteContents = getFromLocalStorage("trash", "Contents");
-//     if(notes.trashNoteTitles && notes.trashNoteTitles.length > 0) {
-//         document.getElementById("btnTrash").dataset.items = notes.trashNoteTitles.length;
-//         document.getElementById("btnEmptyTrash").classList.remove("hide");
-//         for (let indexTrashNote = 0; indexTrashNote < notes.trashNoteTitles.length; indexTrashNote++) {
-//         trashInnerRef.innerHTML += getTrashNoteTemplate(indexTrashNote);
-//         }
-//     } else {
-//         delete document.getElementById("trashBtn").dataset.items;
-//         notes.trashNoteTitles = [];
-//         notes.trashNoteContents = [];
-//         trashInnerRef.innerHTML = getEmptyTrashTemplate();
-//         document.getElementById("emptyTrashBtn").classList.add("hide");
-//     }
-// }
-
-function showHideInput(){
-    document.getElementById("inputBtn").classList.toggle("active");
-    document.getElementById("inputSection").classList.toggle("active");
-}
-
-function showHideArchive(){
-    document.getElementById("archiveBtn").classList.toggle("active");
-    document.getElementById("archiveSection").classList.toggle("active");
-    renderArchiveNotes();
-    if(document.getElementById("archiveSection").classList.contains("active")) {
-        document.getElementById("archiveSection").scrollIntoView();
-    }
-}
-
-function showHideTrash(){
-    document.getElementById("trashBtn").classList.toggle("active");
-    document.getElementById("trashSection").classList.toggle("active");
-    renderTrashNotes();
-    if(document.getElementById("trashSection").classList.contains("active")) {
-        document.getElementById("trashSection").scrollIntoView();
+function showHideLocation(location){
+    if(location == 'active') { return; }
+    document.getElementById(location + "Btn").classList.toggle("active");
+    document.getElementById(location + "Section").classList.toggle("active");
+    renderLocation(location);
+    if(document.getElementById(location + "Section").classList.contains("active")) {
+        document.getElementById(location + "Section").scrollIntoView();
     }
 }
