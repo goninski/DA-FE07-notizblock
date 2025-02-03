@@ -64,7 +64,7 @@ header .buttons img {
 #trashSection {
     background-color: #eee;
 }
-:is(#input, #archiveSection, #trashSection):not(.active) {
+:is(#inputSection, #archiveSection, #trashSection):not(.active) {
     display: none;
 }
 h2 {
