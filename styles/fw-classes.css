@@ -1,5 +1,9 @@
 /***** FRAMEWORK UTILITY CLASSES */
 
+.grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--col-min-width), 100%), 1fr));
+}
 .flex-col {
     display: flex;
     flex-direction: column;
@@ -66,12 +70,30 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-.text-center {
-    text-align: center;
-}
 .hide {
     display: none !important;
 }
+
+/*** IMAGES */
+.bg-img-cover {
+    background-size: cover;
+    background-position: center;
+}
+.img-cover {
+    object-fit: cover;
+}
+.img-contain {
+    object-fit: contain;
+}
+
+/*** TYPOGRAPHY */
+.uppercase {
+    text-transform: uppercase;
+}
+.text-center {
+    text-align: center;
+}
+
 
 
 /*** SECTION SPACING */
@@ -88,10 +110,33 @@
 .pad-y-sec-xs {
     padding: var(--pad-y-sec-xs) var(--pad-y-sec-xs);
 }
+.pad-y {
+    padding-top: var(--sp-10);
+    padding-bottom: var(--sp-10);
+}
+.pad-y-05 {
+    padding-top: var(--sp-05);
+    padding-bottom: var(--sp-05);
+}
+.pad-y-10 {
+    padding-top: var(--sp-10);
+    padding-bottom: var(--sp-10);
+}
+.pad-y-20 {
+    padding-top: var(--sp-20);
+    padding-bottom: var(--sp-20);
+}
 
 /*** MARGIN TOP/BOTTOM */
+.m-y-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .mt {
     margin-top: var(--sp-10);
+}
+.mt-05 {
+    margin-top: 0;
 }
 .mt-05 {
     margin-top: var(--sp-05);
@@ -108,6 +153,9 @@
 
 .mb {
     margin-bottom: var(--sp-10);
+}
+.mb-0 {
+    margin-bottom: 0;
 }
 .mb-05 {
     margin-bottom: var(--sp-05);
@@ -168,7 +216,7 @@
 
 /*** BREAKPOINTS */
 @media(max-width: 719px) {
-    .flex-row {
+    .flex-wrap--ss-mob {
         flex-wrap: wrap;
     }
 }

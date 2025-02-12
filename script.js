@@ -24,34 +24,35 @@ function addNote(target){
             let fieldKey = target + "Note" + noteFieldKey + "s";
             notes[fieldKey].push(fieldValue);
             notesTarget = notes[fieldKey];
-            localStorage.setItem(fieldKey, JSON.stringify(notesTarget));
+            saveToLocalStorage(fieldKey, notesTarget);
         }
-        renderLocation(target, '--', notesTarget.length);
+        renderLocation(target, '--');
     }
 }
 
 function moveNote(indexNote, source, target){
     for (let i = 0; i < noteFieldKeys.length; i++) {
         noteFieldKey = noteFieldKeys[i];
-
         let fieldKey = source + "Note" + noteFieldKey + "s";
         let fieldValue = notes[fieldKey][indexNote];
         notes[fieldKey].splice(indexNote, 1);
         notesSource = notes[fieldKey];
-        localStorage.setItem(fieldKey, JSON.stringify(notesSource));
-
+        saveToLocalStorage(fieldKey, notesSource);
         if(target != 'delete') {
-            fieldKey = target + "Note" + noteFieldKey + "s";
-            notes[fieldKey].push(fieldValue);
-            notesTarget = notes[fieldKey];
-            localStorage.setItem(fieldKey, JSON.stringify(notesTarget));
+            moveNoteToTarget(noteFieldKey, fieldValue, target);
         }    
     }
-    let items = notesSource.length;
     renderLocation(source, target);
-    if(items <= 0) {
+    if(notesSource.length <= 0) {
         showHideLocation(source);
     }
+}
+
+function moveNoteToTarget(noteFieldKey, fieldValue, target) {
+    fieldKey = target + "Note" + noteFieldKey + "s";
+    notes[fieldKey].push(fieldValue);
+    notesTarget = notes[fieldKey];
+    saveToLocalStorage(fieldKey, notesTarget);
 }
 
 function duplicateNote(indexNote, source){
@@ -61,7 +62,7 @@ function duplicateNote(indexNote, source){
         let fieldValue = notes[fieldKey][indexNote];
         notes[fieldKey].push(fieldValue);
         notesSource = notes[fieldKey];
-        localStorage.setItem(fieldKey, JSON.stringify(notesSource));
+        saveToLocalStorage(fieldKey, notesSource);
     }
     renderLocation(source);
 }
@@ -70,7 +71,7 @@ function emptyTrash(){
     for (let i = 0; i < noteFieldKeys.length; i++) {
         let fieldKey = "trashNote" + noteFieldKeys[i] + "s";
         notes[fieldKey] = [];
-        localStorage.setItem(fieldKey, JSON.stringify(notes[fieldKey]));
+        saveToLocalStorage(fieldKey, notes[fieldKey]);
     }
     renderLocation('trash');
     showHideLocation('trash');
@@ -80,6 +81,10 @@ function getFromLocalStorage(source, fieldKey){
     let stor = localStorage.getItem(source + "Note" + fieldKey + "s");
     let obj = JSON.parse(stor);
     return obj;
+}
+
+function saveToLocalStorage(fieldKey, fieldContent){
+    localStorage.setItem(fieldKey, JSON.stringify(fieldContent));
 }
 
 function renderLocation(source = 'active', target = '---'){
@@ -130,6 +135,10 @@ function showHideLocation(location){
     document.getElementById(location + "Btn").classList.toggle("active");
     document.getElementById(location + "Section").classList.toggle("active");
     renderLocation(location);
+    scrollToLocation(location);
+}
+
+function scrollToLocation(location) {
     if(document.getElementById(location + "Section").classList.contains("active")) {
         document.getElementById(location + "Section").scrollIntoView();
     }
