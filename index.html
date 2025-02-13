@@ -13,7 +13,7 @@
 <body onload="renderLocation()">
 
     <header class="section gap">
-        <div class="ct-container flex-row justify-between gap align-center">
+        <div class="ct-container flex-row flex-wrap justify-between gap align-center">
             <h1>Notizblock</h1>
             <div class="flex-row gap-05 buttons">
                 <button onclick="showHideLocation('input')" id="inputBtn" class="btn-default icon-btn active" title="Erfassung ein-/ausblenden"><img src="assets/icons/google-edit-note.svg" alt="enter-note" class="icon-edit"></button>
@@ -24,10 +24,10 @@
             </div>
         </div>
         <div id="inputSection" class="ct-container active">
-            <form>
+            <form onclick="addNote('active')">
                 <input id="inputNoteTitle" type="text" name="title" placeholder="Titel.." required>
                 <textarea id="inputNoteContent"  type="text" name="content" placeholder="Notizinhalt..." required></textarea>
-                <button onclick="addNote('active')" title="Notiz speichern" class="btn-default">
+                <button type="submit" title="Notiz speichern" class="btn-default">
                     <img src="assets/icons/google-save.svg" alt="save-note" class="icon-save">
                 </button>
             </form>
@@ -58,6 +58,16 @@
         </section>
   
     </main>
+
+    <footer class="section pad-y-10">
+        <div class="ct-container">
+            Testproject DA Frontend Masterclass&nbsp;| Jan 2025
+            <div class="footer-links flex-row gap align-center mt-05">
+                <a href="https://github.com/goninski/DA-FE07-notizblock" target="_blank">visit on GitHub</a>
+                <a href="/">Projects</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 

@@ -32,6 +32,7 @@
 
     --clr-text: black;
     --clr-hd: black;
+    --clr-light: white;
     --bg-page: yellow;
     --bg-sts-green: rgb(49, 219, 49);
     --bg-sts-red: #ff1a1a;
@@ -41,7 +42,7 @@ header {
     padding-top: var(--pad-y-sec-sm);
     padding-bottom: var(--pad-y-sec-sm);
     background-color: #333;
-    color: white;
+    color: var(--clr-light);
     position: sticky;
     top: 0;
     left: 0;
@@ -57,6 +58,17 @@ header .buttons button[data-items] {
 }
 header .buttons img {
     height: calc(1.66rem * var(--icon-multipl));
+}
+footer {
+    background-color: #333;
+    color: var(--clr-light);
+}
+.footer-links a {
+    color: #bbb;
+    font-size: var(--fs-text-sm);
+}
+.footer-links a:hover {
+    color: var(--clr-light);
 }
 #archiveSection {
     background-color: lightyellow;
