@@ -14,7 +14,7 @@ let notesTarget = [];
 
 function init() {
     renderLocation();
-    setHomeURL();
+    // setHomeURL();
 }
 
 function addNote(target){
