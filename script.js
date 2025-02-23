@@ -1,4 +1,3 @@
-
 let notes = {
     "activeNoteTitles": [],
     "activeNoteContents": [],
@@ -12,6 +11,11 @@ let noteFieldKeys = ["Title", "Content"];
 let noteFieldKey = "";
 let notesSource = [];
 let notesTarget = [];
+
+function init() {
+    renderLocation();
+    setHomeURL();
+}
 
 function addNote(target){
     let inputNoteTitle = document.getElementById('inputNoteTitle').value;
@@ -142,4 +146,22 @@ function scrollToLocation(location) {
     if(document.getElementById(location + "Section").classList.contains("active")) {
         document.getElementById(location + "Section").scrollIntoView();
     }
+}
+
+function setHomeURL() {
+    let url = new URL(window.location.href);
+    let homeURL = url;
+    console.log(url.hostname);
+    switch(url.hostname) {
+        case "127.0.0.1":
+            homeURL = url.origin + '/' + url.pathname.split("/")[1];
+            break
+        case "francois-gonin.developerakademie.net":
+            homeURL = url.origin + '/' + url.pathname.split("/")[1] + '/' + url.pathname.split("/")[2];
+            break
+        default:
+            homeURL = '/';
+    }
+    let homeLink = document.querySelector('.js-set-home-url');
+    homeLink.href = homeURL;
 }
